@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
+
 const connect = () => {
-  mongoose.connect(process.env.DB_URI, {
+  const username = process.env.USER;
+  const password = process.env.PASSWORD;
+  const adminPassword = encodeURIComponent(password);
+  const uri = `mongodb+srv://${username}:${adminPassword}@cluster0.8ryu92v.mongodb.net/?retryWrites=true&w=majority`;
+  mongoose.connect(uri, {
     useNewUrlParser:true,
     useUnifiedTopology:true,
     })
